@@ -1,0 +1,23 @@
+/* A pocket-sized 3D neighbourhood. Canvas owns geometry; CSS owns its frame. */
+#journey-scene{position:relative;isolation:isolate;width:100%;min-width:0;min-height:490px;overflow:hidden;border:1px solid #d6dfc9;border-radius:34px;background:radial-gradient(ellipse at 52% 35%,#faf9ed 5%,#eaf0dc 58%,#e1e8d0 100%);box-shadow:0 18px 0 -10px #d1dbc6,0 32px 40px -28px rgba(27,63,44,.28),inset 0 1px 0 rgba(255,255,255,.85)}
+#journey-scene::before{content:"";position:absolute;z-index:-1;width:75%;aspect-ratio:1;left:12.5%;top:5%;border:1px solid rgba(118,153,111,.12);border-radius:50%;transform:rotateX(56deg) rotate(-22deg);box-shadow:0 0 0 35px rgba(255,255,255,.17),0 0 0 70px rgba(255,255,255,.12);pointer-events:none}
+.journey-canvas{display:block;position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.journey-header{position:absolute;z-index:2;top:26px;left:28px;right:28px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;pointer-events:none}
+.journey-caption{display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0}
+.journey-eyebrow{font-size:8px;letter-spacing:2px;font-weight:750;color:#5b7050;line-height:1.3}
+.journey-destination{max-width:280px;font-size:12px;line-height:1.4;font-weight:700;letter-spacing:-.25px;color:#234d3f;background:rgba(255,255,248,.88);border:1px solid #dbe2ce;border-radius:9px;padding:8px 12px;box-shadow:0 4px 9px rgba(53,75,38,.04);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.journey-destination::before{content:"";display:inline-block;width:6px;height:6px;background:#548969;border-radius:50%;vertical-align:1px;margin-right:7px;box-shadow:0 0 0 3px #e7efdb}
+.journey-compass{position:relative;display:grid;place-items:start center;width:43px;height:43px;flex:none;border:1px solid #b9c9ab;border-radius:50%;color:#4e6d47;font-size:8px;line-height:1;padding-top:5px;transform:rotate(15deg)}
+.journey-compass::after{content:"";position:absolute;top:17px;left:16px;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:14px solid #668b55;transform:rotate(24deg)}
+.journey-compass::before{content:"";position:absolute;left:7px;right:7px;top:21px;height:1px;background:#c4d2b8}
+.journey-footer{position:absolute;z-index:2;bottom:19px;left:27px;right:23px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.journey-note{color:#566f4b;font-size:7px;letter-spacing:1.25px;font-weight:650;line-height:1.7;max-width:160px}
+.journey-toggle{border:1px solid #b9c9aa;border-radius:20px;background:rgba(255,255,248,.85);color:#355b43;font-family:inherit;font-size:11px;font-weight:650;min-height:40px;min-width:115px;padding:9px 12px;box-shadow:0 3px 6px rgba(41,74,31,.035);cursor:pointer;white-space:nowrap;transition:background .15s,box-shadow .15s}
+.journey-toggle:hover{background:#fffef4;box-shadow:0 4px 12px rgba(41,74,31,.10)}
+.journey-toggle:focus-visible{outline:3px solid #5b8266;outline-offset:3px}
+.journey-map-note{position:absolute;left:28px;bottom:69px;color:#526447;font-size:10px;line-height:1.5;letter-spacing:-.2px}
+.journey-fallback{position:absolute;inset:120px 35px 100px;display:grid;place-content:center;color:#3b6147;font-size:17px;line-height:1.8;text-align:center}
+@media(max-width:800px){#journey-scene{min-height:430px;border-radius:27px}.journey-header{left:23px;right:23px;top:23px}.journey-footer{left:22px;right:20px}.journey-map-note{left:23px}}
+@media(max-width:600px){#journey-scene{min-height:340px;border-radius:24px;box-shadow:0 14px 0 -8px #d1dbc6,0 25px 30px -25px rgba(27,63,44,.3)}.journey-header{left:20px;right:20px;top:19px}.journey-eyebrow{font-size:7px;letter-spacing:1.5px}.journey-destination{font-size:10px;padding:6px 9px;max-width:210px}.journey-compass{width:37px;height:37px;font-size:7px}.journey-compass::after{top:14px;left:13px}.journey-compass::before{top:18px}.journey-footer{left:20px;right:16px;bottom:13px}.journey-note{font-size:6px;letter-spacing:.75px;max-width:120px}.journey-toggle{font-size:11px;min-height:40px;min-width:111px;padding:8px 10px}.journey-map-note{left:20px;bottom:58px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.journey-toggle{transition:none}}
+@media print{#journey-scene{display:none!important}}
