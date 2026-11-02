@@ -1,2 +1,72 @@
-# dongne-lens-quest
-A lightweight Korean apartment explorer with a 3D journey, price-mix detective, and blind choice experiment.
+# 동네렌즈 퀘스트 · Dongne Lens Quest
+
+**내가 살 집을 찾아, 숫자 너머로.**
+
+입체 아파트 마을에서 출발해 동네의 거래를 살펴보고, 가격을 읽는 방식과 내 선택 기준을 직접 실험하는 작은 부동산 웹 앱입니다. **Python 3.11+ 표준 라이브러리 + HTML/CSS/JavaScript**, 설치·빌드·회원가입 없이 실행합니다.
+
+> 첫 실행은 **가상 예시 모드**입니다. 지역명은 실제지만 단지명·가격·거래는 체험용으로 만든 값입니다. 현재 시세나 현재 매물이 아닙니다.
+
+## 세 가지 체험
+
+| 체험 | 해보는 일 |
+| --- | --- |
+| **3D 아파트 탐험** | 작은 탐험가와 아파트 마을을 둘러보고 관심 동네로 이동합니다. 화면의 마을은 실제 지도가 아닌 코드로 그린 3D 장면입니다. |
+| **가격 착시 탐정** | 전체 거래 중앙값 변화와 같은 동·단지·면적대의 비교를 나란히 봅니다. 거래된 집의 구성이 달라지면 해석이 어떻게 달라지는지 가상 연습 예제로도 체험합니다. |
+| **주소 블라인드 선택실험** | 단지·동 이름을 가린 후보를 가격·면적·표본 수만 보고 선택합니다. 이름 공개 후 선택을 유지하거나 바꾸며 자신의 기준을 돌아봅니다. |
+
+여기에 **매매·전세·월세 요약, 기간·면적·동 필터, 자금 조건 적합도, 금리 스트레스 계산, JSON 저장과 화면 링크 공유**를 제공합니다. 서울 25개 구의 아파트를 지원하며, 첫 조회는 전체 면적입니다.
+
+## 바로 실행
+
+```bash
+python3 server.py --host 0.0.0.0 --port 3000
+```
+
+프로젝트 폴더에서 실행하고 **http://localhost:3000**을 엽니다. Windows에서는 `python3` 대신 `python`을 사용할 수 있습니다. `pip install`, `npm install`, 프런트엔드 빌드는 필요 없습니다.
+
+**Replit:** [Import](https://replit.com/import)에서 GitHub 저장소 또는 전달받은 `dongne-lens-quest-v0.2.zip`을 가져온 뒤 실행합니다. [실행 안내](docs/REPLIT.md) · [새 GitHub 저장소 구성](docs/GITHUB.md) · [60초 시연](docs/DEMO.md)
+
+## 공식 실거래 연결
+
+공공데이터포털의 [아파트 매매 API](https://www.data.go.kr/data/15126469/openapi.do)와 [전월세 API](https://www.data.go.kr/data/15126474/openapi.do) 활용신청 후 **서버 환경변수 `MOLIT_SERVICE_KEY`**를 설정합니다. Replit에서는 **Secrets**를 사용합니다. 서버를 다시 실행하고 공식 자료 모드로 전환하세요.
+
+`.env.example`은 설정 항목 안내용이며 `.env` 자동 로드는 하지 않습니다. 키 없이도 두 실험과 3D 화면은 가상 모드에서 작동합니다. 공식 조회 실패를 가상 데이터로 대체하지 않으며, 일부 조회 누락은 화면에 알립니다. **실제 발급키를 이용한 국토부·Replit 외부 연결 검증은 아직 수행하지 않았습니다.**
+
+## 숫자를 읽는 기준
+
+- 신고된 과거 계약 자료를 집계합니다. 호가·감정가격·공식 가격지수가 아닙니다.
+- 가격 착시 탐정은 같은 **동·단지·5㎡ 구간**을 비교합니다. 동일 세대의 반복 거래가 아니며 층·향·수리 상태를 보정하지 않습니다. 두 변화율의 차이는 구성 효과의 확정적 크기가 아닙니다.
+- 주소 블라인드의 후보는 2건 이상 과거 거래를 묶은 카드입니다. 현재 매물이나 특정 한 세대가 아니며 정답·성향 진단·투자 추천을 제공하지 않습니다.
+- 조건 적합도는 예산 60점 + 자기자금 40점의 공개된 가정식입니다. 매매 5건 미만이면 점수를 보류합니다. 미래 수익·대출 승인을 예측하지 않습니다.
+- 기본 자금 계산은 30년 원리금균등, 공실률 5%, 연 운영비 240만원입니다. 임대 현금흐름은 원금상환·세금을 제외합니다. 금액 입력은 **만원**, API·JSON은 **원**입니다.
+
+[자료 출처·계산식·한계](docs/DATA_SOURCES.md)에 상세 기준을 적었습니다. 사용자 선택과 금융 입력은 서버 이력이나 브라우저 저장소에 저장하지 않습니다. 다운로드한 JSON에는 입력 가정이 포함되지만 공유 URL에는 포함되지 않습니다.
+
+## 저장소 구성
+
+| 경로 | 역할 |
+| --- | --- |
+| `server.py` | 웹 서버, API, 입력 검증, 정적 파일 제공 |
+| `analytics.py` | 거래 집계와 자금 시뮬레이션 |
+| `insights.py` | 착시 비교·블라인드 후보·가상 연습 예제 |
+| `molit.py`, `demo.py`, `data/regions.json` | 공식 조회, 가상 자료, 서울 지역 검색 |
+| `public/index.html`, `styles.css`, `app.js` | 화면 구조와 기본 조회 흐름 |
+| `public/journey.js`, `journey.css` | 외부 라이브러리 없는 3D 장면 |
+| `public/labs.js`, `labs.css` | 두 실험의 상호작용과 화면 |
+| `tests/` | 계산·API·파싱 자동 검사 |
+| `.replit`, `replit.md` | Replit 실행 설정과 수정 지침 |
+| `.github/workflows/ci.yml` | Python 테스트·JavaScript 문법 검사 |
+| `docs/` | 시연·설정·계산·검증 문서 |
+
+## 개발과 검증
+
+```bash
+python3 -m unittest discover -s tests -v
+node --check public/app.js
+node --check public/journey.js
+node --check public/labs.js
+```
+
+Node는 문법 검사에만 사용하며 앱 구동에는 필요 없습니다. [검증 범위](docs/VALIDATION.md)와 [10개 에이전트의 검토 구성](docs/REVIEW.md)을 참고하세요.
+
+이 프로젝트는 기존 RWA Apartment Model 실험에서 출발한 **독립 앱 저장소**입니다. 현재 앱에 필요한 계산·화면·테스트·실행 설정을 한곳에 모았습니다.

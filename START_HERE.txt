@@ -1,0 +1,24 @@
+동네렌즈 퀘스트 v0.2 — 실행 안내
+
+1. Replit의 https://replit.com/import 에서 GitHub 또는 ZIP을 선택합니다.
+2. 새 앱 저장소 dongne-lens-quest 또는 dongne-lens-quest-v0.2.zip을 가져옵니다.
+3. 프로젝트 루트에 server.py, insights.py, public/, .replit이 있는지 확인합니다.
+4. Run을 누릅니다. Python 3.11 이상에서 별도 pip/npm 설치 없이 실행합니다.
+5. 첫 화면은 가상 예시이며 실제 시세가 아닙니다.
+
+새 기능: 가격 착시 탐정 / 주소 블라인드 선택실험 / 3D 아파트 탐험
+시연 순서: 동네 검색 → 착시 연습 예제 → 블라인드 선택·이름 공개 → 자금 계획
+
+로컬 실행: python3 server.py --host 0.0.0.0 --port 3000
+브라우저: http://localhost:3000
+검사: python3 -m unittest discover -s tests -v
+
+공식 실거래 연결은 선택 사항입니다. 국토부 매매·전월세 API 활용신청 후
+Replit Secrets에 MOLIT_SERVICE_KEY를 추가하고 서버를 다시 실행합니다.
+.env는 자동으로 읽지 않습니다. 키를 코드·채팅·GitHub에 넣지 마세요.
+
+README.md: 기능과 전체 구조
+docs/REPLIT.md: Replit 실행
+docs/GITHUB.md: 독립 저장소 구성
+docs/DEMO.md: 60초 시연
+docs/VALIDATION.md: 검증 범위

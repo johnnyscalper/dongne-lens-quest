@@ -1,0 +1,12 @@
+{
+  "name": "dongne-lens-quest",
+  "version": "0.2.0",
+  "private": true,
+  "description": "A lightweight Korean apartment explorer with a 3D journey and two choice experiments",
+  "scripts": {
+    "dev": "python3 server.py",
+    "start": "python3 server.py --host 0.0.0.0",
+    "test": "python3 -m unittest discover -s tests -v",
+    "check:js": "node --check public/app.js && node --check public/journey.js && node --check public/labs.js"
+  }
+}
